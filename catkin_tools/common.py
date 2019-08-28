@@ -27,7 +27,10 @@ try:
     _cmd_split(u'\u00E9')
 
     def cmd_split(s):
-        return _cmd_split(s.decode('utf-8'))
+        if hasattr(s, "decode"):
+            return _cmd_split(s.decode('utf-8'))
+        else:
+            return _cmd_split(s)
 except UnicodeEncodeError:
     cmd_split = _cmd_split
 
